@@ -1,0 +1,33 @@
+{% extends 'catalog/base.html' %}
+{% load my_tags_filtres %}
+
+
+{% block content %}
+<div class="container">
+    <div class="row text-center">
+
+
+        <div class="col-12">
+            <a href="#">
+                <div class="card mb-4 box-shadow">
+                    <div class="card-header">
+                        <h4 class="my-0 font-weight-normal">{{ object.product_name | title }}</h4>
+                    </div>
+                    <div class="card-body">
+                        <h1 class="card-title pricing-card-title"> Цена: {{ object.price }}</h1>
+                        <p>Описание: {{ object.description }}</p>
+<!--                        <p><img src="{{ object.image | mediapath }}" width="200px"></p>-->
+                        <p><img src="{% mediapath object.image %}" width="200px"></p>
+                        <p>Категория: {{ object.category }}</p>
+                        <p>Дата создания: {{ object.create_date }}</p>
+                        <p>Дата редактирования: {{ object.last_change }}</p>
+                        <button type="button" class="btn btn-lg btn-block btn-outline-primary">Купить</button>
+                    </div>
+                </div>
+            </a>
+        </div>
+
+
+    </div>
+</div>
+{% endblock %}
