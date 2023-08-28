@@ -40,3 +40,9 @@ class Product(models.Model):
         ordering = ('price',)
 
 
+
+
+
+
+
+

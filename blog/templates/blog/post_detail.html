@@ -1,0 +1,30 @@
+{% extends 'catalog/base.html' %}
+{% load my_tags_filtres %}
+
+
+{% block content %}
+<div class="container">
+    <div class="row text-center">
+
+
+        <div class="col-12">
+            <a href="#">
+                <div class="card mb-4 box-shadow">
+                    <div class="card-header">
+                        <h1 class="my-0 font-weight-normal">{{ object.title | title }}</h1>
+                    </div>
+                    <div class="card-body">
+                        <p>Описание: {{ object.content }}</p>
+                        <p><img src="{% mediapath object.image %}" width="200px"></p>
+                        <p>Дата создания: {{ object.create_date }}</p>
+                        <p>Количество просмотров: {{ object.views_count }}</p>
+
+                    </div>
+                </div>
+            </a>
+        </div>
+
+
+    </div>
+</div>
+{% endblock %}

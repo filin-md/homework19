@@ -7,7 +7,7 @@
         {% for object in object_list %}
 
         <div class="col-3">
-            <a href="#">
+            <a href="{% url 'product' object.pk %}">
                 <div class="card mb-4 box-shadow">
                     <div class="card-header">
                         <h4 class="my-0 font-weight-normal">{{ object.product_name | title }}</h4>
