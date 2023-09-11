@@ -8,23 +8,22 @@
 
 
         <div class="col-12">
-            <a href="#">
-                <div class="card mb-4 box-shadow">
-                    <div class="card-header">
-                        <h4 class="my-0 font-weight-normal">{{ object.product_name | title }}</h4>
-                    </div>
-                    <div class="card-body">
-                        <h1 class="card-title pricing-card-title"> Цена: {{ object.price }}</h1>
-                        <p>Описание: {{ object.description }}</p>
-<!--                        <p><img src="{{ object.image | mediapath }}" width="200px"></p>-->
-                        <p><img src="{% mediapath object.image %}" width="200px"></p>
-                        <p>Категория: {{ object.category }}</p>
-                        <p>Дата создания: {{ object.create_date }}</p>
-                        <p>Дата редактирования: {{ object.last_change }}</p>
-                        <button type="button" class="btn btn-lg btn-block btn-outline-primary">Купить</button>
-                    </div>
+            <div class="card mb-4 box-shadow">
+                <div class="card-header">
+                    <h4 class="my-0 font-weight-normal">{{ object.product_name | title }}</h4>
                 </div>
-            </a>
+                <div class="card-body">
+                    <h1 class="card-title pricing-card-title"> Цена: {{ object.price }}</h1>
+                    <p>Описание: {{ object.description }}</p>
+                    <!--                        <p><img src="{{ object.image | mediapath }}" width="200px"></p>-->
+                    <p><img src="{% mediapath object.image %}" width="200px"></p>
+                    <p>Категория: {{ object.category }}</p>
+                    <p>Дата создания: {{ object.create_date }}</p>
+                    <p>Дата редактирования: {{ object.last_change }}</p>
+                    <a href="{% url 'update_product' object.pk %}" class="btn btn-lg btn-block btn-outline-primary">Редактировать</a>
+                    <a href="{% url 'delete_product' object.pk %}" class="btn btn-lg btn-block btn-outline-primary">Удалить</a>
+                </div>
+            </div>
         </div>
 
 
