@@ -1,5 +1,8 @@
+from django.conf import settings
 from django.db import models
 from django.utils import timezone
+
+from users.models import User
 
 # Create your models here.
 
@@ -25,10 +28,12 @@ class Product(models.Model):
     product_name = models.CharField(max_length=100, verbose_name= 'Наименование')
     description = models.TextField(verbose_name='Описание')
     image = models.ImageField(upload_to='catalog/', verbose_name='Изображение', **NULLABLE)
-    category = models.ForeignKey('Category', on_delete=models.CASCADE)
+    category = models.ForeignKey(Category, on_delete=models.CASCADE)
     price = models.IntegerField(verbose_name='Цена за покупку')
     create_date = models.DateTimeField(default=timezone.now, verbose_name='Дата создания')
     last_change = models.DateTimeField(default=timezone.now, verbose_name='Дата последнего изменения')
+
+    creator = models.ForeignKey(User, on_delete=models.CASCADE, **NULLABLE, verbose_name='пользователь')
 
 
     def __str__(self):

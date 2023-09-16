@@ -17,13 +17,20 @@ class ProductDetailView(DetailView):
 
 class ProductListView(ListView):
     model = Product
-    template_name = 'catalog/home.html'
+    template_name = 'catalog/product_list.html'
 
 
 class ProductCreateView(CreateView):
     model = Product
     form_class = ProductForm
     success_url = reverse_lazy('home')
+
+    def form_valid(self, form):
+        self.object = form.save()
+        self.object.creator = self.request.user
+        self.object.save()
+        
+        return super().form_valid(form)
 
 
 class ProductUpdateView(UpdateView):

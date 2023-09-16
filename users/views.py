@@ -1,9 +1,12 @@
+import random
+
 from django.conf import settings
 from django.core.mail import send_mail
-from django.urls import reverse_lazy
-from django.views.generic import CreateView
+from django.shortcuts import redirect
+from django.urls import reverse_lazy, reverse
+from django.views.generic import CreateView, UpdateView
 
-from users.forms import UserRegisterForm
+from users.forms import UserRegisterForm, UserUpdateForm
 from users.models import User
 
 
@@ -23,3 +26,26 @@ class RegisterView(CreateView):
 
         )
         return super().form_valid(form)
+
+class UserUpdateView(UpdateView):
+    model = User
+    success_url = reverse_lazy('users:profile')
+    form_class = UserUpdateForm
+
+    def get_object(self, queryset=None):
+        return self.request.user
+
+def generate_new_password(request):
+
+    new_password = ''.join([str(random.randint(0,9)) for _ in range(12)])
+    request.user.set_password(new_password)
+    request.user.save()
+    send_mail(
+        subject='Пароль изменён',
+        message=f'Вы успешно изменили пароль! Ваш новый пароль: {new_password}',
+        from_email=settings.EMAIL_HOST_USER,
+        recipient_list=[request.user.email]
+
+    )
+
+    return redirect(reverse('home'))
