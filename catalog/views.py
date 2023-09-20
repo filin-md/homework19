@@ -5,6 +5,7 @@ from django.views.generic import DetailView, ListView, CreateView, UpdateView, D
 
 from catalog.forms import ProductForm, VersionForm
 from catalog.models import Product, Version
+from catalog.services import get_categories_cache
 
 
 # Create your views here.
@@ -69,3 +70,13 @@ def contacts(request):
     # функция принимает параметр request
     # и с помощью специальной функции возвращает ответ
     return render(request, 'catalog/contacts.html')
+
+
+def categories_list(request):
+    context = {
+        'object_list': get_categories_cache(),
+        'title': 'Все категории',
+    }
+
+
+    return render(request, 'catalog/categories.html', context)
